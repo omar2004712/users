@@ -1,4 +1,3 @@
-const { before } = require("mocha");
 const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise; // to use ES6 promises instead of mongoose promise lib
