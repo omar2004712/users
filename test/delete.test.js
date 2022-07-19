@@ -20,4 +20,13 @@ describe("delete records from the database", () => {
         done();
       });
   });
+
+  it("class deleteMany method", (done) => {
+    User.deleteMany({ _id: joe._id })
+      .then(() => User.findOne({ name: "Joe" }))
+      .then((user) => {
+        assert.strictEqual(user, null);
+        done();
+      });
+  });
 });
