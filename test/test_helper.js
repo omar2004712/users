@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise; // to use ES6 promises instead of mongoose promise lib
 
 before((done) => {
+  // to run before the excution of any test
   mongoose.connect("mongodb://localhost/users_test"); // build a mongoose DB for testing
   mongoose.connection
     .once("open", () => {
