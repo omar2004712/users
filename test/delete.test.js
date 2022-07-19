@@ -29,4 +29,13 @@ describe("delete records from the database", () => {
         done();
       });
   });
+
+  it("class findOneAndRemove method", (done) => {
+    User.findOneAndRemove({ name: "Joe" })
+      .then(() => User.findOne({ name: "Joe" }))
+      .then((user) => {
+        assert.strictEqual(user, null);
+        done();
+      });
+  });
 });
