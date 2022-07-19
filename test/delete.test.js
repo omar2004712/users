@@ -38,4 +38,13 @@ describe("delete records from the database", () => {
         done();
       });
   });
+
+  it("class findByIdAndRemove method", (done) => {
+    User.findByIdAndRemove(joe._id)
+      .then(() => User.findOne({ name: "Joe" }))
+      .then((user) => {
+        assert.strictEqual(user, null);
+        done();
+      });
+  });
 });
