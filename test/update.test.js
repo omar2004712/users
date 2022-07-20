@@ -38,4 +38,8 @@ describe("Updates records in the database", () => {
   it("class findOneAndUpdate method", (done) => {
     assertName(User.findOneAndUpdate({ name: "Joe" }, { name: "Alex" }), done);
   });
+
+  it("class findByIdAndUpdate method", (done) => {
+    assertName(User.findByIdAndUpdate(joe._id, { name: "Alex" }), done);
+  });
 });
