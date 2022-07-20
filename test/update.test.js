@@ -5,7 +5,7 @@ describe("Updates records in the database", () => {
   let joe;
 
   beforeEach((done) => {
-    joe = new User({ name: "Joe" });
+    joe = new User({ name: "Joe", postCount: 1 });
 
     joe.save().then(() => done());
   });
@@ -41,5 +41,14 @@ describe("Updates records in the database", () => {
 
   it("class findByIdAndUpdate method", (done) => {
     assertName(User.findByIdAndUpdate(joe._id, { name: "Alex" }), done);
+  });
+
+  it("increment postCount by 1", (done) => {
+    User.updateMany({ name: "Joe" }, { $inc: { postCount: 1 } })
+      .then(() => User.findOne({ name: "Joe" }))
+      .then((user) => {
+        assert.strictEqual(user.postCount, 2);
+        done();
+      });
   });
 });
