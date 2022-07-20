@@ -11,40 +11,28 @@ describe("delete records from the database", () => {
     });
   });
 
-  it("remove using model instance remove", (done) => {
-    joe
-      .remove()
-      .then(() => User.find({ name: "Joe" }))
-      .then((users) => {
-        assert.strictEqual(users.length, 0);
+  function isUserDeleted(operation, done) {
+    operation
+      .then(() => User.findOne({ name: "Joe" }))
+      .then((user) => {
+        assert.strictEqual(user, null);
         done();
       });
+  }
+
+  it("remove using model instance remove", (done) => {
+    isUserDeleted(joe.remove(), done);
   });
 
   it("class deleteMany method", (done) => {
-    User.deleteMany({ _id: joe._id })
-      .then(() => User.findOne({ name: "Joe" }))
-      .then((user) => {
-        assert.strictEqual(user, null);
-        done();
-      });
+    isUserDeleted(User.deleteMany({ _id: joe._id }), done);
   });
 
   it("class findOneAndRemove method", (done) => {
-    User.findOneAndRemove({ name: "Joe" })
-      .then(() => User.findOne({ name: "Joe" }))
-      .then((user) => {
-        assert.strictEqual(user, null);
-        done();
-      });
+    isUserDeleted(User.findOneAndRemove({ name: "Joe" }), done);
   });
 
   it("class findByIdAndRemove method", (done) => {
-    User.findByIdAndRemove(joe._id)
-      .then(() => User.findOne({ name: "Joe" }))
-      .then((user) => {
-        assert.strictEqual(user, null);
-        done();
-      });
+    isUserDeleted(User.findByIdAndRemove(joe._id), done);
   });
 });
