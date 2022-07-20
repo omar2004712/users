@@ -15,6 +15,16 @@ describe("validates records", () => {
     const validationResult = joe.validateSync();
     const { message } = validationResult.errors.name;
 
-    assert.strictEqual(message, "Name must be longer than 2 characters");
+    assert.strictEqual(message, "Name must be longer than 2 characters.");
+  });
+
+  it("disallows an invalid record to be saved in the DB", (done) => {
+    const joe = new User({ name: "Al" });
+    joe.save().catch((validationResult) => {
+      const { message } = validationResult.errors.name;
+
+      assert.strictEqual(message, "Name must be longer than 2 characters.");
+      done();
+    });
   });
 });
