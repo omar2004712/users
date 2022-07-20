@@ -3,7 +3,10 @@ const Shema = mongoose.Schema;
 
 // a schema for the users model
 const UserShema = new Shema({
-  name: String,
+  name: {
+    type: String,
+    required: [true, "Name is required."],
+  },
   postCount: Number,
 });
 
