@@ -30,4 +30,8 @@ describe("Updates records in the database", () => {
   it("instance updateOne", (done) => {
     assertName(joe.updateOne({ name: "Alex" }), done);
   });
+
+  it("class update method", (done) => {
+    assertName(User.updateMany({ name: "Joe" }, { name: "Alex" }), done);
+  });
 });
