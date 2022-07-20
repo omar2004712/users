@@ -34,4 +34,8 @@ describe("Updates records in the database", () => {
   it("class update method", (done) => {
     assertName(User.updateMany({ name: "Joe" }, { name: "Alex" }), done);
   });
+
+  it("class findOneAndUpdate method", (done) => {
+    assertName(User.findOneAndUpdate({ name: "Joe" }, { name: "Alex" }), done);
+  });
 });
