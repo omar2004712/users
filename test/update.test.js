@@ -5,7 +5,7 @@ describe("Updates records in the database", () => {
   let joe;
 
   beforeEach((done) => {
-    joe = new User({ name: "Joe", postCount: 1 });
+    joe = new User({ name: "Joe", likes: 1 });
 
     joe.save().then(() => done());
   });
@@ -43,12 +43,12 @@ describe("Updates records in the database", () => {
     assertName(User.findByIdAndUpdate(joe._id, { name: "Alex" }), done);
   });
 
-  xit("increment postCount by 1", (done) => {
-    // because to make the postCount to be virtual instead of being saved on the DB
-    User.updateMany({ name: "Joe" }, { $inc: { postCount: 1 } })
+  it("increment postCount by 1", (done) => {
+    // switched to likes instead of postCount
+    User.updateMany({ name: "Joe" }, { $inc: { likes: 1 } })
       .then(() => User.findOne({ name: "Joe" }))
       .then((user) => {
-        assert.strictEqual(user.postCount, 2);
+        assert.strictEqual(user.likes, 2);
         done();
       });
   });
