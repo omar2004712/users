@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const PostSchema = require("./postSchema");
 const Shema = mongoose.Schema;
 
 // a schema for the users model
@@ -12,6 +13,9 @@ const UserShema = new Shema({
     },
   },
   postCount: Number,
+  posts: [PostSchema],
 });
+
+const User = mongoose.model("users", UserShema);
 
 module.exports = User;
