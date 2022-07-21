@@ -14,6 +14,4 @@ const UserShema = new Shema({
   postCount: Number,
 });
 
-const User = mongoose.model("user", UserShema);
-
 module.exports = User;
