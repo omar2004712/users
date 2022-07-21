@@ -43,7 +43,8 @@ describe("Updates records in the database", () => {
     assertName(User.findByIdAndUpdate(joe._id, { name: "Alex" }), done);
   });
 
-  it("increment postCount by 1", (done) => {
+  xit("increment postCount by 1", (done) => {
+    // because to make the postCount to be virtual instead of being saved on the DB
     User.updateMany({ name: "Joe" }, { $inc: { postCount: 1 } })
       .then(() => User.findOne({ name: "Joe" }))
       .then((user) => {
