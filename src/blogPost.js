@@ -8,7 +8,11 @@ const BlogPostSchema = new Schema({
     // collect the ids of the post
     {
       type: Schema.Types.ObjectId,
-      ref: "Comment",
+      ref: "comment",
     },
   ],
 });
+
+const BlogPost = mongoose.model("blogPost", BlogPostSchema);
+
+module.exports = BlogPost;
