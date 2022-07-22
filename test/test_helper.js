@@ -15,8 +15,15 @@ before((done) => {
 
 // to avoid piling data in the collection while testing
 beforeEach((done) => {
-  mongoose.connection.collections.users.drop(() => {
+  const { users, comments, blogposts } = mongoose.connection.collections;
+
+  users.drop(() => {
     // once all the data inside the collection is dropped
-    done();
+    // added the dropping of comments and blogPost models too
+    comments.drop(() => {
+      blogposts.drop(() => {
+        done();
+      });
+    });
   });
 });

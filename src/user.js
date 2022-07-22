@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const PostSchema = require("./postSchema");
-const Shema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // a schema for the users model
-const UserSchema = new Shema({
+const UserSchema = new Schema({
   name: {
     type: String,
     required: [true, "Name is required."],
@@ -26,6 +26,6 @@ UserSchema.virtual("postCount").get(function () {
   return this.posts.length;
 });
 
-const User = mongoose.model("users", UserSchema);
+const User = mongoose.model("user", UserSchema);
 
 module.exports = User;
