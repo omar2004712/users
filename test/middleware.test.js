@@ -18,4 +18,14 @@ describe("middleware", () => {
 
     Promise.all([joe.save(), blogPost.save()]).then(() => done());
   });
+
+  it("deletes a user with the associated blogPosts", (done) => {
+    joe
+      .remove()
+      .then(() => BlogPost.count())
+      .then((count) => {
+        assert.strictEqual(count, 0);
+        done();
+      });
+  });
 });
